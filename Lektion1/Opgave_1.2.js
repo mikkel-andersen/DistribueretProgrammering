@@ -12,19 +12,20 @@ for (let i = list.length - 1; i >= 0; i--) {
 }
 console.log(list.toString()); // => 0,1,2,4,7,8,9,13,16
 
-function binarySearch(arr, x) {
+function binarySearch(list, x) {
 let start = 0; end = list.length - 1;
 
 while (start <= end) {
     let mid = Math.floor((start + end ) / 2);
 
-    if (list[mid] === x) return mid;
+    if (list[mid] === x) 
+        return mid;
 
-    else if (list[mid] < x) start = mid + 1;
+    else if (list[mid] < x) 
+        start = mid + 1;
 
     else end = mid - 1;
 }
-
 return -1;
 }
 
