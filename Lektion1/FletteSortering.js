@@ -1,10 +1,18 @@
-let list1 = [1, 3, 4, 6, 8], list2 = [2, 5, 7, 9, 10]
+let list1 = [1, 3, 4, 6, 8], list2 = [1, 5, 7, 9, 10]
 
 function mergeSort(list1, list2) {
     let list3 = [];
 
-    let i = 0, j = 0, i2 = 0;
-    while (i < list1.length && i < list2.length) {
+    let i = 0, j = 0;
+    while (i < list1.length && j < list2.length) {
+        
+        if (list1[i] == list2[j]) {
+            list3.push(list1[i]);
+            list3.push(list2[j]);
+            i++;
+            j++;
+        }
+
         if (list1[i] < list2[j]) {
             list3.push(list1[i])
             i++;
