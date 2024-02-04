@@ -29,4 +29,4 @@ function printPrime(n)
     } 
 } 
 
-printPrime(10000);
+printPrime(100);
