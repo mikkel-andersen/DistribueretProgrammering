@@ -1,3 +1,11 @@
+function test(x) {
+    return function() {return x + 1}
+}
+
+let thisFunction = test(3);
+console.log(thisFunction())
+
+
 // closure.js
 function next() {
     let n = 1;
