@@ -13,6 +13,12 @@ console.log(persons[0].mail);
 persons[2] = {name : "Mathias", mail : "mathias@mail.dk, telefon : 12345678"};
 console.log(persons[2].name);
 
+persons[2].name = "Mads";
+persons[2].mail = "mads@mail.com"
+
+delete persons[0];
+
 for (let i = 0; i < persons.length; i++) {
     console.log(persons[i]);
 }
+
