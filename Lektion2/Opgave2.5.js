@@ -12,4 +12,7 @@ console.log(persons[0].mail);
 
 persons[2] = {name : "Mathias", mail : "mathias@mail.dk, telefon : 12345678"};
 console.log(persons[2].name);
-console.log(persons.toString());
+
+for (let i = 0; i < persons.length; i++) {
+    console.log(persons[i]);
+}
