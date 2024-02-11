@@ -21,7 +21,7 @@ function bubbleSort(array) {
     }
 }
 
-/* function swap(array, i, j) {
+/* function swap(array, i, j) { //Rykket op i bubblesort funktionen, som en indre funktion
     let temp = array[i];
     array[i] = array[j];
     array[j] = temp;
