@@ -3,7 +3,7 @@ const app = express();
 const fs = require('fs').promises;
 const port = 8080;
 
-app.use(express.static('*/Eksempler/Node & Express/Node.js og Express/filer'));
+app.use(express.static(__dirname + '/filer'));
 
 function genererLinks(filnavne) {
     let html = '';

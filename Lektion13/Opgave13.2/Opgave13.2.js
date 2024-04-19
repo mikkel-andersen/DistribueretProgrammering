@@ -2,9 +2,9 @@
 // const soegbeskedUrl = 'https://localhost:44367/api/SoegBeskeder/';
 // const rumUrl = 'https://localhost:44367/api/chatRum/';
 
-const beskedUrl = 'https://beskedserver.azurewebsites.net/api/Beskeder/';
+const beskedUrl = 'https://localhost:8080/beskeder';
 const soegbeskedUrl = 'https://beskedserver.azurewebsites.net/api/SoegBeskeder/';
-const rumUrl = 'https://beskedserver.azurewebsites.net/api/chatRum/';
+const rumUrl = 'http://localhost:8080/beskeder/:rum';
 
 async function get(url) {
     const respons = await fetch(url);

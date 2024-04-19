@@ -1,0 +1,52 @@
+doctype html
+html
+    head
+        title My Website
+    body
+        h1 Mikkels grobutik
+        p Dette er en lovlig hjemmeside
+        table
+            each product in products
+                tr
+                    td= product.id
+                    td= product.navn
+                    td= product.pris + " kr."
+                    td
+                        button(onclick=`clickfunction(${product.id})`) Køb
+                tr
+                    td(colspan=4)
+                        hr
+
+        h2 My Orders
+        table
+            each order in orders
+                tr
+                    td= order.id
+                    td= order.navn
+                    td= order.pris + " kr."
+
+        script.
+            const products = !{JSON.stringify(products)};
+            async function post(url, objekt) {
+                const respons = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(objekt),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (respons.status !== 201) // Created
+                    throw new Error(respons.status);
+                return await respons.text();
+            }
+            let clickfunction = async (id) => {
+                try {
+                    const product = products.find(p => p.id === id);
+                    if (product) {
+                        await post("http://localhost:8080/order", { id: product.id });
+                        //location.reload();
+                    }
+                } catch (fejl) {
+                    console.log(fejl);
+                }
+            };
