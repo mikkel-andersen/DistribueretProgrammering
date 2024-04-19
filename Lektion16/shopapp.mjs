@@ -39,16 +39,8 @@ app.post('/order', (request, response) => {
     const product = products.find(p => p.id === id); // find the product with the given ID
     if (product) {
         orders.push(product); // add the product to the orders
+        response.status(201).send(['added']);
         console.log(orders);
-        request.session.save(err => { // save the session
-            if (err) {
-                response.status(500).send({ message: 'Failed to save session' });
-            } else {
-                response.status(201).send(['added']);
-            }
-        });
-    } else {
-        response.status(404).send({ message: 'Product not found' });
     }
 });
 
