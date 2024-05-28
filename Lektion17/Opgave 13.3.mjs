@@ -1,11 +1,10 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where } from 'firebase/firestore'
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where } from 'firebase/firestore';
+const port = 8070;
 
-const port = 8080;
 
-// Import the functions you need from the SDKs you need
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -13,13 +12,13 @@ const port = 8080;
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCdWMTrAmaLCR0oOp1krKIiABnfh2NAkSU",
-  authDomain: "chatrum-94a41.firebaseapp.com",
-  projectId: "chatrum-94a41",
-  storageBucket: "chatrum-94a41.appspot.com",
-  messagingSenderId: "667005616937",
-  appId: "1:667005616937:web:77c768cd23298b9c056d38",
-  measurementId: "G-055NJQ7JQR"
+  apiKey: "AIzaSyD_ffxn4MELB-OQoIb_jKZzHMxQQJG7k-I",
+  authDomain: "chat-a3975.firebaseapp.com",
+  projectId: "chat-a3975",
+  storageBucket: "chat-a3975.appspot.com",
+  messagingSenderId: "343393496565",
+  appId: "1:343393496565:web:3e58dedf1c67714e4b44bc",
+  measurementId: "G-06N8R29E33"
 };
 
 // Initialize Firebase
@@ -35,6 +34,47 @@ let chatRum = [
     { navn: "rum1" },
     { navn: "rum2" }
 ];
+
+async function getAlleBeskeder() {
+    let beskedCol=collection(db, 'beskeder');
+    let beskedSnapshot = await getDocs(beskedCol);
+
+    let retur = beskedSnapshot.docs.map(doc => {
+        let data = doc.data();
+        data.docID = doc.id;
+        return data;
+    })
+    return beskeder;
+}
+
+async function getBeskederForRum(chatrum) {
+    let beskedCol=collection(db, 'beskeder');
+    let q = query(beskedCol, where('chatrum', '==', chatrum));
+    let beskedSnapshot = await getDocs(q);
+
+    let retur = beskedSnapshot.docs.map(doc => {
+        let data = doc.data();
+        data.docID = doc.id;
+        return data;
+    })
+    return retur;
+}
+
+async function getChatRum() {
+    let chatrumCol=collection(db, 'chatrum');
+    let chatrumSnapshot = await getDocs(chatrumCol);
+
+    let retur = chatrumSnapshot.docs.map(doc => {
+        let data = doc.data();
+        data.docID = doc.id;
+        return data;
+    })
+    return retur;
+}
+
+async function gemBesked() {
+    
+}
 
 //Tillad cors requests
 app.use(function (req, res, next) {

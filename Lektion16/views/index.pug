@@ -43,7 +43,7 @@ html
                 try {
                     const product = products.find(p => p.id === id);
                     if (product) {
-                        await post("http://localhost:8080/order", { id: product.id });
+                        await post("http://localhost:7777/order", { id: product.id });
                         //location.reload();
                     }
                 } catch (fejl) {

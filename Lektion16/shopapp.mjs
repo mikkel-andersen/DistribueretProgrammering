@@ -5,7 +5,7 @@ import sessions from 'express-session';
 import pug from 'pug';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import session from 'express-session';
+const port = 7777;
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -44,4 +44,4 @@ app.post('/order', (request, response) => {
     }
 });
 
-app.listen(8080);
+app.listen(port);

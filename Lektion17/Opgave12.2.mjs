@@ -1,6 +1,8 @@
-const beskedUrl = 'http://localhost:8000/beskeder/';
-const soegbeskedUrl = 'http://localhost:8000/beskeder/';
-const rumUrl = 'http://localhost:8000/chatrum/';
+const beskedUrl = 'http://localhost:8070/beskeder/';
+const soegbeskedUrl = 'http://localhost:8070/beskeder/';
+const rumUrl = 'http://localhost:8070/chatrum/';
+
+let vistChatRum;
 
 // const beskedUrl = 'https://beskedserver.azurewebsites.net/api/Beskeder/';
 //const soegbeskedUrl = 'https://beskedserver.azurewebsites.net/api/SoegBeskeder/';
@@ -67,7 +69,7 @@ async function postBesked(afsender, tekst, chatrum) {
     let besked = {afsender:afsender, tekst: tekst, chatrum: chatrum };
     try {
         let respons = await post(beskedUrl, besked);
-        console.log(respons);
+        console.log(vistChatRum);
     } catch (fejl) {
         console.log(fejl);
     }
@@ -75,11 +77,12 @@ async function postBesked(afsender, tekst, chatrum) {
 async function deleteBesked(id) {
     try {
         let respons = await deLete(beskedUrl + id);
-        console.log(respons);
+        visBeskederFor(vistChatRum);
     } catch (fejl) {
         console.log(fejl);
     }
 }
+
 
 
 //mainGetBeskeder();
@@ -91,7 +94,7 @@ async function visAlleRum() {
     let rumDiv = document.querySelector("#rum");
     let rum = await getRum();
     for (let r of rum) {
-        rumDiv.innerHTML += "<input type=button onclick=\"visBeskederFor('" + r.navn + "')\" value=\"" + r.navn + "\"></input>";
+        rumDiv.innerHTML += "<input type=button onclick=\"visBeskederFor('" + r.Navn + "')\" value=\"" + r.Navn + "\"></input>";
     }
 }
 
@@ -101,35 +104,45 @@ async function visBeskederFor(rum) {
     beskedDiv.innerHTML = "";
     let table = document.createElement('table');
     table.setAttribute("border", "solid");
-    createRow(table, 'id', 'Tekst', 'Chatrum');
+    createHeaderRow(table);
     for (let besked of beskeder) {
-        createRow(table, besked.id, besked.tekst, besked.chatRum);
+        createRow(table, besked.docID, besked.tekst, besked.chatrum);
     }
     beskedDiv.appendChild(table);
+    vistChatRum = rum;
+}
+
+function createHeaderRow(table) {
+    let tr = document.createElement('tr');
+    let thid = document.createElement('th');
+    thid.appendChild(document.createTextNode('Id'));
+    let thtekst = document.createElement('th');
+    thtekst.appendChild(document.createTextNode('tekst'));
+    let thchatrum = document.createElement('th');
+    thchatrum.appendChild(document.createTextNode('chatrum'));
+    let thDeleteLink = document.createElement('th');
+    thDeleteLink.appendChild(document.createTextNode('Slet'));
+    tr.appendChild(thid);
+    tr.appendChild(thtekst);
+    tr.appendChild(thchatrum);
+    tr.appendChild(thDeleteLink);
+    table.appendChild(tr);
 }
 
 function createRow(table, id, tekst, chatrum) {
     let tr = document.createElement('tr');
-    let thid = document.createElement('th');
-    if (Number.isFinite(id)) {
-        thid.appendChild(document.createTextNode(id));
-    } else {
-        thid.appendChild(document.createTextNode('Id'));
-    }
-    let thtekst = document.createElement('th');
+    let thid = document.createElement('td');
+    thid.appendChild(document.createTextNode(id));
+    let thtekst = document.createElement('td');
     thtekst.appendChild(document.createTextNode(tekst));
-    let thchatrum = document.createElement('th');
+    let thchatrum = document.createElement('td');
     thchatrum.appendChild(document.createTextNode(chatrum));
-    let thDeleteLink = document.createElement('th');
-    if (Number.isFinite(id)) {
-        let deleteLink = document.createElement('a');
-        deleteLink.innerHTML = 'Slet';
-        deleteLink.setAttribute('onclick', 'deleteBesked("' + id + '");return false;');
-        deleteLink.setAttribute('href', '');
-        thDeleteLink.appendChild(deleteLink);
-    } else {
-        thDeleteLink.appendChild(document.createTextNode('Slet'));
-    }
+    let thDeleteLink = document.createElement('td');
+    let deleteLink = document.createElement('a');
+    deleteLink.innerHTML = 'Slet';
+    deleteLink.setAttribute('onclick', 'deleteBesked("' + id + '");return false;');
+    deleteLink.setAttribute('href', '');
+    thDeleteLink.appendChild(deleteLink);
     tr.appendChild(thid);
     tr.appendChild(thtekst);
     tr.appendChild(thchatrum);
