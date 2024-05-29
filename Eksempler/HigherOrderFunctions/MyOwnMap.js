@@ -31,5 +31,5 @@ let persons = [
 ];
 
 let aldre = MyMap(persons, p => p.age)
-aldre.forEach(a => console.log(a.age))
+aldre.forEach(a => console.log(a))
 
