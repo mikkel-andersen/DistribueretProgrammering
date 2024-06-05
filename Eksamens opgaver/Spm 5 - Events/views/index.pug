@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Kontakt Liste
+    
+  body
+    h2 Kontakt Liste
+    table(border='1')
+      each kontakt in kontakter
+        tr
+          td= kontakt.navn
+          td= kontakt.tlf
+          td
+            form(action='/updateKontakt' method='POST')
+              input(type='hidden' name='navn' value=kontakt.navn)
+              input(type='text' name='nytTlf' placeholder='Nyt telefonnummer')
+              button(type='submit') Opdater
+
+  script(src='/index.js')
