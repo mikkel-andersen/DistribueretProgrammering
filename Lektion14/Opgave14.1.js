@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs').promises;
-const port = 8080;
+const port = 6543;
 
 app.use(express.static(__dirname + '/filer'));
 

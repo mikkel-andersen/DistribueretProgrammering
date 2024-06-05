@@ -39,6 +39,6 @@ app.get('/', async (request, response) => {
     }
 });
 
-app.listen(8080);
+app.listen(6543);
 
 console.log('Lytter på port 8080 ...');
