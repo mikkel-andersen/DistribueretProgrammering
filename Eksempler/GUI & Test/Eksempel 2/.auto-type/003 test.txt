@@ -1,5 +1,0 @@
-file: app.js
-line: 3
-align: top
----
-→→→→→→→→→→→→→→→→1; //
