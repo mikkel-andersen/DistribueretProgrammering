@@ -32,6 +32,7 @@ function mergeSort(list1, list2) {
     return list3;
 }
 
-console.log(mergeSort(list1, list2));
 
+console.log(mergeSort(list1, list2));
+mergeSort(list1, list2).forEach(e => console.log(e))
 

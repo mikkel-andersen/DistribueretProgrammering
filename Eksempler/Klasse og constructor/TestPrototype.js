@@ -33,6 +33,7 @@ console.log(minBil.Farve);
 
 minBil.__proto__.koer = function() { console.log("Dette er den nye koer funktion") };
 Bil.prototype.koer();
+minBil.koer(1234);
 
 
 let xBil = new XBil();
